@@ -141,4 +141,8 @@ $(stage).on("enoughmoves", function(){
 	})($congrats.show().find("> div"));
 });
 
+input.keydown("End", function(){
+	$(stage).trigger("enoughmoves");
+});
+
 document.body.appendChild(stage.$e[0]);
