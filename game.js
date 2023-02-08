@@ -94,22 +94,37 @@ function Stage(player, input, threshold) {
 		$e.addClass("suspended");
 		input.setActive(false);
 	};
-	
-	input.keydown("Space", function(){
+
+	function jump() {
 		player.jump(150);
 		count();
-	});
-	
-	input.keydown("Left", function(){
+	}
+
+	function goLeft(){
 		movePlayer(-1);
 		count();
-	});
+	}
 
-	input.keydown("Right", function(){
+	function goRight(){
 		movePlayer(1);
 		count();
-	});
+	}
 	
+	input.keydown("Space", jump);
+	$e.on("tap", jump);
+
+	input.keydown("Left", goLeft);
+	$e.on("swipeleft", function(){
+		goLeft();
+		setTimeout(stopPlayer, 100);
+	});
+
+	input.keydown("Right", goRight);
+	$e.on("swiperight", function(){
+		goRight();
+		setTimeout(stopPlayer, 100);
+	});
+
 	input.keyup("Left", stopPlayer);
 	input.keyup("Right", stopPlayer);
 	
